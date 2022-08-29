@@ -30,6 +30,8 @@ class User {
   #email;
 
   constructor({ name, email }) {
+    // console.log('this.constructor.#emailList', this.constructor.#emailList);
+    // console.log('User.#emailList', User.#emailList);
     this.name = name;
     this.#email = email;
     const isIncludes = User.#isIncludes(email);
@@ -47,6 +49,20 @@ class User {
     return email.includes('@gmail.com');
   }
 
+  getEmail() {
+    return this.#email;
+  }
+
+  setEmail(newEmail) {
+    const isValid = this.#checkEmail(newEmail);
+    console.log('isValid', isValid);
+    if (!isValid) {
+      console.log(`${newEmail} is not valid!`);
+      return;
+    }
+    this.#email = newEmail;
+  }
+
   get email() {
     return this.#email;
   }
@@ -62,6 +78,12 @@ class User {
 }
 
 const userInstance = new User({ name: 'Mango', email: 'mango@gmail.com' });
+
+userInstance.email = 'qwe@';
+console.log(userInstance.email);
+
+userInstance.setEmail('qwe@2');
+console.log(userInstance.getEmail());
 
 // console.log(userInstance.__proto__ === User.prototype);
 

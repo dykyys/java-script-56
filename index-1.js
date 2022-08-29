@@ -1,48 +1,87 @@
 'use strict';
-/*
- * Ланцюжки прототипів.
- * Object.create().
- * obj.hasOwnProperty()
- */
 
-// https://learn.javascript.ru/article/native-prototypes/native-prototypes-classes.svg
+// const tags = ['premium', 'promoted', 'top'];
+// console.log(tags[tags.length - 1]);
 
-// прототип - це резервне сховище властивостей і методів об'єкта
+// const apartment = {
+//   imgUrl: 'https://via.placeholder.com/640x480',
+//   descr: 'Spacious apartment in the city center',
+//   rating: 4,
+//   price: 2153,
+//   tags: ['premium', 'promoted', 'top'],
+//   owner: {
+//     name: 'Henry',
+//     phone: '982-126-1588',
+//     email: 'henry.carter@aptmail.com',
+//   },
+// };
 
-//* Власні та не власні властивості об'єкта
-//Метод obj.isPrototypeOf(obj2)
+// console.log(apartment.tags[apartment.tags.length - 1]);
 
-const user = {
-  name: 'Mango',
-  age: 21,
-};
-//при створенні об'єкта визивається new Object іна прототипі буде Object.prototype
+//1 при оголошенні const обов'язково потрібно вказати значення
+//при оголошенні let без вказаного значення змінна ініціалізується значенням undefined
+//2 змінну оголошену за допомогою const не можна перезаписати
 
-const userDeveloper = Object.create(user);
-//на прототипі буде об'єкт user
+// const user = 'Mango';
 
-user.email = 'mango@gmail.com';
+// user = 'Kiwi';
 
-userDeveloper.skill = 'react';
-// userDeveloper.age = 27;
+// console.log(user);
 
-// console.log(userDeveloper.__proto__);
+// let a;
+// console.log(a);
 
-// console.log('user is prototype', user.isPrototypeOf(userDeveloper));
+// console.log(user);
 
-//* Перевірка приватних властивостей obj.hasOwnProperty()
-//* Цикл for...in, перебирає всі властивості, власні та успадковані.
+// var user = 'Mango';
 
-// for (const key in userDeveloper) {
-//   if (userDeveloper.hasOwnProperty(key)) {
-//     console.log(key);
-//   }
-// }
+// console.log(user);
 
-//Object.keys повертає масив власних ключів
+// const userData = {
+//   name: 'Mango',
+//   email: 'mango@gmai.com',
+//   message: 'hello world',
+// };
 
-const keys = Object.keys(userDeveloper);
+// // const keys = Object.keys(userData);
+// // keys.forEach((key) => console.log(`${key} - ${userData[key]}`));
 
-// for (const key of keys) {
-//   console.log(userDeveloper[key]);
-// }
+// const keys = Object.entries(userData);
+
+// keys.forEach(([key, value]) => console.log(`${key} - ${value}`));
+
+// const carObj = cars.reduce((acc, car) => {
+//   return { ...acc, [car.model]: { ...car } };
+// }, {});
+// console.log(carObj);
+
+const formRef = document.querySelector('.login-form');
+
+formRef.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  const {
+    elements: { email, password },
+  } = event.currentTarget;
+
+  if (email.value === '' || password.value === '') {
+    alert('Необходимо заполнить все поля!');
+    return;
+  }
+
+  //для більш складниї форм
+  // const formData = new FormData(formRef);
+  // formData.forEach((name, value) => {
+  //   console.log(name);
+  //   console.log(value);
+  // })
+
+  const userData = {
+    email: email.value,
+    password: password.value,
+  };
+
+  console.log(userData);
+
+  event.currentTarget.reset();
+});
