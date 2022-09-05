@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.1.0/modern-normalize.min.css"
+      integrity="sha512-wpPYUAdjBVSE4KJnH1VR1HeZfpl1ub8YT/NKx4PuQ5NmX2tKuGu6U/JRp5y+Y8XG2tV+wKQpNHVUX03MfMFn9Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica,
+          Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+        font-size: 14px;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      a {
+        display: block;
+      }
+
+      ul {
+        list-style: none;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-left: 0;
+      }
+
+      .container {
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 15px;
+        padding-right: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <button type="button" data-action="add">add</button>
+    <section class="gallery">
+      <div class="container">
+        <h1 class="js-main-title">Gallery</h1>
+        <ul class="gallery" id="js-gallery">
+          <!-- <li>item-1</li>
+          <li>item-2</li>
+          <li>item-3</li>
+          <li>item-4</li> -->
+        </ul>
+      </div>
+    </section>
+
+    <script src="./js/create-gallery-with-inner-html.js"></script>
+  </body>
+</html>
