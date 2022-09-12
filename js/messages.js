@@ -1,16 +1,19 @@
 'use strict';
 
-const btnListRef = document.querySelector('.js-messages-wrapper');
+const listRef = document.querySelector('.js-messages-wrapper');
 
-const handleBtnClick = ({ target }) => {
+const onListClick = ({ target }) => {
   if (target.nodeName !== 'BUTTON') {
     return;
   }
+  // const liRef = target.parentNode;
+  const liRef = target.closest('.message');
 
-  // target.parentNode.remove();
+  if (!liRef) {
+    return;
+  }
 
-  const liRef = target.closest('li.message');
   liRef.remove();
 };
 
-btnListRef.addEventListener('click', handleBtnClick);
+listRef.addEventListener('click', onListClick);
