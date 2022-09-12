@@ -1,0 +1,35 @@
+.menu {
+  display: flex;
+  justify-content: center;
+  margin: 0 -15px;
+}
+
+.menu__item {
+  margin: 0 15px;
+}
+
+.menu__btn {
+  padding: 10px 20px;
+  border: none;
+  color: #ffffff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 500ms linear;
+}
+
+.menu__btn:hover,
+.menu__btn:focus {
+  transform: scale(1.05);
+}
+
+.menu__btn_action_load {
+  background-color: #2ed573;
+}
+
+.menu__btn_action_save {
+  background-color: #e67e22;
+}
+
+.menu__btn_action_search {
+  background-color: #3742fa;
+}
