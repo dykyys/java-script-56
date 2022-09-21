@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page title</title>
+    <link rel="stylesheet" href="./sass/index.scss" />
+    <script type="module" src="./js/form.js"></script>
+  </head>
+  <body>
+    <!-- ❗️❗️❗️ Add partials like so for every page -->
+    <a class="nav__link" href="./index.html">back</a>
+    <div class="container">
+      <form class="contact-form js-contact-form">
+        <input
+          name="name"
+          type="text"
+          class="contact-form-input"
+          placeholder="Введіть ім'я"
+        />
+        <input
+          name="email"
+          type="email"
+          class="contact-form-input js-contact-email"
+          placeholder="Введіть email"
+        />
+        <textarea
+          class="contact-form-message"
+          name="message"
+          placeholder="Введіть повідомлення"
+        ></textarea>
+        <button class="contact-form-submit" type="submit">submit</button>
+      </form>
+    </div>
+  </body>
+</html>
