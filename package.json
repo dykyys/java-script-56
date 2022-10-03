@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://goitacademy.github.io/parcel-project-template",
   "scripts": {
-    "start": "parcel src/*.html -p 9999",
+    "start": "parcel src/*.html -p 3333",
     "build": "parcel build src/*.html --public-url /parcel-project-template/"
   },
   "repository": {
