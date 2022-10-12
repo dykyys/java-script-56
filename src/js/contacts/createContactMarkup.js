@@ -1,6 +1,6 @@
 import { formatDateCreate } from './helpers/formatDateCreate';
 
-export function createContact({ name, phone, email, id, createdAt }) {
+export function createContactMarkup({ name, phone, email, id, createdAt }) {
   return /*HTML*/ `<div data-id="${id}" class="col-md-6 js-contact-card">
       <div class="card mb-2 shadow">
         <div class="d-flex justify-content-between pb-3 border-bottom">

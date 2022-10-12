@@ -4,7 +4,7 @@ import localStorApi from './localestorage';
 import { refs } from './refs';
 import { createContact } from './service/contact.service';
 import { spinerPlay, spinerStop } from './spinner';
-import { createContactMarkup } from './createContact';
+import { createContactMarkup } from './createContactMarkup';
 
 const LOCAL_STORAGE_KEY = 'user-data';
 

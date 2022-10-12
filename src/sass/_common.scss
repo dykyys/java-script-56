@@ -1,46 +1,27 @@
 @import '~node_modules/modern-normalize/modern-normalize.css';
-
-@keyframes spinner-line-fade-more {
-  0%,
-  100% {
-    opacity: 0; /* minimum opacity */
-  }
-  1% {
-    opacity: 1;
-  }
+@import '~node_modules/material-icons/iconfont/material-icons.css';
+.list {
+  list-style: none;
 }
 
-@keyframes spinner-line-fade-quick {
-  0%,
-  39%,
-  100% {
-    opacity: 0.25; /* minimum opacity */
-  }
-  40% {
-    opacity: 1;
-  }
+.link {
+  text-decoration: none;
 }
 
-@keyframes spinner-line-fade-default {
-  0%,
-  100% {
-    opacity: 0.22; /* minimum opacity */
-  }
-  1% {
-    opacity: 1;
-  }
+.nav__link {
+  text-decoration: none;
+  padding: 10px 16px;
+  margin: 4px;
+  border-radius: 8px;
+  background: #4fb53f;
+  box-shadow: 0 10px 10px 0 #cccccc;
+  display: inline-block;
 }
 
-@keyframes spinner-line-shrink {
-  0%,
-  25%,
-  100% {
-    /* minimum scale and opacity */
-    transform: scale(0.5);
-    opacity: 0.25;
-  }
-  26% {
-    transform: scale(1);
-    opacity: 1;
-  }
+.container {
+  max-width: 1200px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-left: auto;
+  margin-right: auto;
 }
