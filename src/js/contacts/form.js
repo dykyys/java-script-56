@@ -2,7 +2,7 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import throttle from 'lodash.throttle';
 import localStorApi from './localestorage';
 import { refs } from './refs';
-import { createContact } from './service/contact.service';
+import { createContact } from './service/AXIOScontact.service';
 import { spinerPlay, spinerStop } from './spinner';
 import { createContactMarkup } from './createContactMarkup';
 
@@ -10,7 +10,7 @@ const LOCAL_STORAGE_KEY = 'user-data';
 
 initForm();
 
-const handleSubmit = event => {
+const handleSubmit = async event => {
   event.preventDefault();
   const { name, email, phone } = event.target.elements;
 
@@ -26,21 +26,22 @@ const handleSubmit = event => {
   formData.forEach((value, name) => {
     userData[name] = value;
   });
-  spinerPlay();
-  createContact(userData)
-    .then(data => {
-      const markup = createContactMarkup(data);
-      refs.list.insertAdjacentHTML('afterbegin', markup);
-      toggleModal();
-    })
-    .catch(error => {
-      console.log(error);
-    })
-    .finally(() => {
-      spinerStop();
-    });
 
-  event.currentTarget.reset();
+  try {
+    spinerPlay();
+
+    const data = await createContact(userData);
+    const markup = createContactMarkup(data);
+    refs.list.insertAdjacentHTML('afterbegin', markup);
+
+    toggleModal();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    spinerStop();
+  }
+
+  event.target.reset();
   localStorApi.remove(LOCAL_STORAGE_KEY);
 };
 

@@ -5,7 +5,38 @@ import { refs } from './refs';
 
 const unsplash = new UnsplashAPI();
 
-const handleSubmit = event => {
+const options = {
+  root: null,
+  rootMargin: '100px',
+  threshold: 1.0,
+};
+const callback = async function (entries, observer) {
+  entries.forEach(async entry => {
+    // if (entry.isIntersecting && entry.intersectionRect.bottom > 550) {
+    if (entry.isIntersecting) {
+      unsplash.incrementPage();
+      observer.unobserve(entry.target);
+
+      try {
+        const { results } = await unsplash.getPhotos();
+
+        const markup = createMarkup(results);
+
+        refs.list.insertAdjacentHTML('beforeend', markup);
+        if (unsplash.isShowLoadMore) {
+          const target = document.querySelector('.gallery__item:last-child');
+          io.observe(target);
+        }
+      } catch (error) {
+        Notify.failure(error.message, 'Щось пішло не так!');
+        clearPage();
+      }
+    }
+  });
+};
+const io = new IntersectionObserver(callback, options);
+
+const handleSubmit = async event => {
   event.preventDefault();
 
   const {
@@ -20,31 +51,31 @@ const handleSubmit = event => {
 
   clearPage();
 
-  unsplash
-    .getPhotos()
-    .then(({ results, total }) => {
-      if (results.length === 0) {
-        Notify.info(`За вашим запитом
+  try {
+    const { results, total } = await unsplash.getPhotos();
+    if (results.length === 0) {
+      Notify.info(`За вашим запитом
  ${searchQuery} зображень не знайдено!
 `);
-        return;
-      }
+      return;
+    }
+    const markup = createMarkup(results);
+    refs.list.insertAdjacentHTML('beforeend', markup);
 
-      const markup = createMarkup(results);
-      refs.list.insertAdjacentHTML('beforeend', markup);
+    unsplash.calculateTotalPages(total);
 
-      unsplash.calculateTotalPages(total);
+    Notify.success(`Ми знайшли ${total} зображень по запиту ${searchQuery}`);
 
-      Notify.success(`Ми знайшли ${total} зображень по запиту ${searchQuery}`);
+    if (unsplash.isShowLoadMore) {
+      const target = document.querySelector('.gallery__item:last-child');
+      console.log(target);
 
-      if (unsplash.isShowLoadMore) {
-        refs.loadMoreBtn.classList.remove('is-hidden');
-      }
-    })
-    .catch(error => {
-      Notify.failure(error.message, 'Щось пішло не так!');
-      clearPage();
-    });
+      io.observe(target);
+    }
+  } catch (error) {
+    Notify.failure(error.message, 'Щось пішло не так!');
+    clearPage();
+  }
 };
 
 const onLoadMore = () => {

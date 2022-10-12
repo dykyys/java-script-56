@@ -8,75 +8,83 @@ import {
   getContactById,
   updateContact,
   deleteContact,
-} from './service/contact.service';
+} from './service/AXIOScontact.service';
 import { createContactMarkup } from './createContactMarkup';
 import { refs } from './refs';
 import { spinerPlay, spinerStop } from './spinner';
 
-spinerPlay();
+initPage();
 
-getContacts()
-  .then(data => {
+async function initPage() {
+  try {
+    spinerPlay();
+
+    const data = await getContacts();
     const markup = [...data].reverse().map(createContactMarkup);
+
     refs.list.insertAdjacentHTML('beforeend', markup.join(''));
-  })
-  .catch(error => {
-    console.log(error);
-  })
-  .finally(() => {
+  } catch ({ message }) {
+    Notify.failure(message);
+  } finally {
     spinerStop();
-  });
-// spinerPlay();
-// getContactById(5)
-//   .then(data => {
-// const markup = createContact(data);
-// refs.list.innerHTML = markup;
-//   })
-//   .catch(error => {
+  }
+}
+
+//fetch by id
+
+// initPage();
+
+// async function initPage() {
+//   try {
+//     spinerPlay();
+
+//     const data = await getContactById(5);
+
+//     const markup = createContactMarkup(data);
+
+//     refs.list.innerHTML = markup;
+//   } catch (error) {
 //     console.log(error);
-//   })
-//   .finally(() => {
+//   } finally {
 //     spinerStop();
-//   });
-
-// const updateBtn = () => {
-//   spinerPlay();
-//   updateContact({ name: 'Mango', id: 42 })
-//     .then(data => {
-//       console.log(data);
-//       Notify.success(`${data.name} wap updated!`);
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     })
-//     .finally(() => {
-//       spinerStop();
-//     });
-// };
-
-// refs.updateBtn.addEventListener('click', updateBtn);
-
-// const handleDelete = event => {
-//   if (event.target.nodeName !== 'BUTTON') {
-//     return;
 //   }
+// }
 
-//   const item = event.target.closest('.js-contact-card');
-//   if (!item) {
-//     return;
-//   }
-//   spinerPlay();
-//   deleteContact(item.dataset.id)
-//     .then(data => {
-//       Notify.success(`${data.name} was deleted!`);
-//       item.remove();
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     })
-//     .finally(() => {
-//       spinerStop();
-//     });
-// };
+const updateBtn = async () => {
+  spinerPlay();
 
-// refs.list.addEventListener('click', handleDelete);
+  try {
+    const data = await updateContact({ name: 'Mango', id: 10 });
+    Notify.success(`${data.name} wap updated!`);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    spinerStop();
+  }
+};
+
+refs.updateBtn.addEventListener('click', updateBtn);
+
+const handleDelete = async event => {
+  if (event.target.nodeName !== 'BUTTON') {
+    return;
+  }
+
+  const item = event.target.closest('.js-contact-card');
+  if (!item) {
+    return;
+  }
+  try {
+    spinerPlay();
+
+    const data = await deleteContact(item.dataset.id);
+    Notify.success(`${data.name} was deleted!`);
+    item.remove();
+  } catch (error) {
+    console.log(error);
+  } finally {
+    spinerStop();
+  }
+};
+
+refs.list.addEventListener('click', handleDelete);
